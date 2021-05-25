@@ -20,9 +20,9 @@ const sample = function( array){
 }
 const seedDB = async function(){
     await Campground.deleteMany({});
-    for(let i=0;i<50;i++)
+    for(let i=0;i<200;i++)
     {
-        const rand= Math.floor(Math.random()*1000);
+        const rand= Math.floor(Math.random()*200);
         const price = Math.floor(Math.random() * 100);
         const camp= new Campground({
             author: '60a266ecb307d76ceaceeee1',
@@ -30,7 +30,7 @@ const seedDB = async function(){
             title : `${sample(descriptors)} ${sample(places)}`,
             geometry :{
                 type: "Point", 
-                coordinates: [83.36667, 26.75] 
+                coordinates: [cities[rand].long, cities[rand].lat]
             },
             images: [{
             
@@ -41,8 +41,8 @@ const seedDB = async function(){
             {
             
                 url:
-                    'https://res.cloudinary.com/dm2xluceh/image/upload/v1621701549/RateCamp/drdqdjzruoyyoipysnah.jpg',
-                filename: 'RateCamp/drdqdjzruoyyoipysnah'
+                    'https://res.cloudinary.com/dm2xluceh/image/upload/v1621721147/RateCamp/mxzh5xgvmbzf2lehpxo1.jpg',
+                filename: 'RateCamp/mxzh5xgvmbzf2lehpxo1'
             }],
             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
             price: price
