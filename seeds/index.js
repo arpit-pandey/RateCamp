@@ -35,8 +35,8 @@ const seedDB = async function(){
             images: [{
             
                 url:
-                    'https://res.cloudinary.com/dm2xluceh/image/upload/v1621701548/RateCamp/fwnq699s1nzhaqibn1r0.jpg',
-                filename: 'RateCamp/fwnq699s1nzhaqibn1r0'
+                    'https://res.cloudinary.com/dm2xluceh/image/upload/v1622047736/RateCamp/ig9nznikngfton7fsxaj.jpg',
+                filename: 'RateCamp/ig9nznikngfton7fsxaj'
             },
             {
             
