@@ -29,7 +29,11 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted"><%=campground.location%></li>
                 <li class="list-group-item">Submitted by <%=campground.author.username %></li>
+                <% if(campground.price===0){ %> 
+                    <li class="list-group-item">Free</li>
+                    <% }else{ %> 
                 <li class="list-group-item">₹ <%=campground.price %></li>
+                <% } %> 
             </ul>
             <% if(currentUser && campground.author.equals(currentUser)){ %> 
             <div class="card-body">
