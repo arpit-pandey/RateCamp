@@ -2,8 +2,6 @@ if(process.env.NODE_ENV !== "production"){
     require('dotenv').config();
 }
 
-
-
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -16,13 +14,17 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User =require('./models/user');
 const helmet = require('helmet');
-
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/user');
 const mongoSanitize = require('express-mongo-sanitize');
 
-mongoose.connect('mongodb://localhost:27017/rate-camp', {
+const MongoStore = require("connect-mongo");
+
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/rate-camp'
+// 
+
+mongoose.connect(dbUrl , {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -46,9 +48,20 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
+const secret = process.env.SECRET || 'thisshouldbebettersecret';
+const store= MongoStore.create({
+    mongoUrl : dbUrl,
+    secret ,
+    touchAfter: 24*3600
+});
+store.on("error", function(e){
+    console.log("Session store error",e);
+})
+
 const sessionConfig = {
+    store: store,
     name: 'session_id',
-    secret: 'thisshouldbebettersecret',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
